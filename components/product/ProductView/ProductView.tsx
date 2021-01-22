@@ -112,13 +112,20 @@ const ProductView: FC<Props> = ({ product }) => {
                 <div className="flex flex-row py-4">
                   {opt.values.map((v: any, i: number) => {
                     const active = (choices as any)[opt.displayName]
-
+                    // console.log(v)
                     return (
                       <Swatch
                         key={`${v.entityId}-${i}`}
                         active={v.label === active}
                         variant={opt.displayName}
-                        color={v.hexColors ? v.hexColors[0] : ''}
+                        color={
+                          v.hexColors
+                            ? v.hexColors[0]
+                            : opt.displayName === 'color'
+                            ? v.label
+                            : ''
+                        }
+                        // color={opt.displayName === 'color' ? v.label : ''}
                         label={v.label}
                         onClick={() => {
                           setChoices((choices) => {
